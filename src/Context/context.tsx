@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "../axios-activities";
 
 export enum ActivityEnum {
   sleep = "sleep",
@@ -30,6 +31,13 @@ export const useActivityContext = () => {
 
 const ActivityProvider = ({ children }: React.PropsWithChildren<{}>) => {
   const [activities, setActivities] = React.useState<Activity[]>([]);
+
+  React.useEffect(() => {
+    axios
+      .get("/activities.json")
+      .then((res) => setActivities(Object.values(res.data)))
+      .catch((err) => console.log({ err }));
+  }, []);
 
   return (
     <SetActivityContext.Provider value={setActivities}>

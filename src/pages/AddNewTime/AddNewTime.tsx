@@ -10,12 +10,19 @@ import {
 import { AddIcon } from "@chakra-ui/icons";
 import { useForm } from "react-hook-form";
 import { Activity, useActivityContext } from "../../Context/context";
+import axios from "../../axios-activities";
 
 function AddNewTime() {
   const { activities, setActivities } = useActivityContext();
   const { register, handleSubmit } = useForm<Activity>();
-  const onSubmit = (data: Activity) => {
+  const onSubmit = (data: Activity, e: any) => {
     setActivities([...activities, data]);
+
+    axios.post('/activities.json',data)
+    .then(res => console.log({res}))
+    .catch(err => console.log({err}));
+
+    e.target.reset(); 
   };
 
   return (

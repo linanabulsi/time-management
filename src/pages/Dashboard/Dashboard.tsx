@@ -5,21 +5,12 @@ import BarChart from "../../components/Charts/barChart/BarChart";
 import PieChart from "../../components/Charts/pieChart/PieChart";
 
 function Dashboard() {
-  const { register, handleSubmit, watch } = useForm<String>({ mode: "onBlur" });
+  const { register, watch } = useForm<String>({ mode: "onBlur" });
   const date: string = watch("date");
-
-  const onSubmit = (data: any) => {
-    return (
-      <>
-        <PieChart date={data} />
-        <BarChart date={date} />
-      </>
-    );
-  };
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form>
         <FormControl mr={10} w={60} float="right">
           <FormLabel ml={3} mt={4}>
             Date

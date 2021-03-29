@@ -5,6 +5,8 @@ import { Grid, GridItem } from "@chakra-ui/react";
 
 function Page(props: any) {
   const { component: Component, ...rest } = props;
+  console.log("render");
+  
   return (
     <Route {...rest}>
       <Grid
